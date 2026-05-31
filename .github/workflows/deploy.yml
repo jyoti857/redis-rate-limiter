@@ -1,0 +1,39 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{github.actor}}
+          password: ${{secrets.GITHUB_TOKEN}}
+
+      - name: Build
+        run: |
+          docker build \
+          -t ghcr.io/${{github.repository}}/backend:latest .
+
+      - name: push
+        run: |
+          docker push \
+          ghcr.io/${{github.repository}}/backend:latest
+
+      - name: Setup Kubeconfig
+        run: |
+          mkdir -p ~/.kube
+          echo "${{secrets.KUBE_CONFIG}}" > ~/.kube/config
+
+      - name: Deploy
+        run: |
+          kubectl apply -f k8s/
+          kubectl rollout restart deployment/backend
