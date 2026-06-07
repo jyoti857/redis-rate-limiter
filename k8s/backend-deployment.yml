@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: ghcr.io/YOUr_github/backend:latest
+          image: ghcr.io/jyoti857/backend:latest
 
           env:
             - name: REDIS_HOST
