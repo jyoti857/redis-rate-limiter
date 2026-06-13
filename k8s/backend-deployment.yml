@@ -18,14 +18,14 @@ spec:
     spec:
       containers:
         - name: backend
-          image: ghcr.io/jyoti857/backend:latest
+          image: ghcr.io/jyoti857/redis-rate-limiter/backend:latest
 
           env:
             - name: REDIS_HOST
               value: redis
 
           ports:
-            - containers: 3000
+            - containerPort: 3000
 
           livenessProbe:
             httpGet:
