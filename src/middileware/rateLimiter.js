@@ -3,7 +3,7 @@ const redis = require("../config/redis");
 const LIMIT = 2; //10
 const WINDOW = 60;
 
-module.exports = async (req, resizeBy, next) => {
+module.exports = async (req, res, next) => {
   try {
     const ip = req.ip;
     const count = await redis.incr(ip);
