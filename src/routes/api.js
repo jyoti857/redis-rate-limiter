@@ -9,7 +9,7 @@ router.get("/hello", (req, res) => {
 });
 
 router.get("/health", (req, res) => {
-  res.status(200).send("OK");
+  res.status(200).send("OK32");
 });
 
 module.exports = router;

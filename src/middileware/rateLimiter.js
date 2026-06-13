@@ -1,6 +1,6 @@
 const redis = require("../config/redis");
 
-const LIMIT = 2; //10
+const LIMIT = 12; //10
 const WINDOW = 60;
 
 module.exports = async (req, res, next) => {
@@ -12,7 +12,7 @@ module.exports = async (req, res, next) => {
     }
     if (count > LIMIT) {
       return res.status(429).json({
-        message: "Too many requests",
+        message: "Too many requests12",
       });
     }
     next();
